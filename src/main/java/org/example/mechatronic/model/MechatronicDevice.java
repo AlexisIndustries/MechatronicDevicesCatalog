@@ -6,8 +6,11 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.*;
 
+
 @Table
 @Entity
+@Getter
+@Setter
 public class MechatronicDevice {
     @Id
     @GeneratedValue
@@ -16,13 +19,14 @@ public class MechatronicDevice {
     private String description; // Описание устройства
     private double price; // Цена устройства
 
-    public MechatronicDevice(String name, String description, double price) {
-        this.name = name;
-        this.description = description;
+    public MechatronicDevice(  String name, String description, double price ){
         this.price = price;
+        this.description = description;
+        this.name = name;
     }
 
     public MechatronicDevice() {
 
     }
+
 }

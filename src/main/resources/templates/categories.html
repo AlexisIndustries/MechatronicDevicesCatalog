@@ -7,12 +7,16 @@
 <body>
 <h1>Категории:</h1>
 <div th:if="${ not#lists.isEmpty(categories)}">
-    <table>
+    <table border="2">
         <tr>
             <th>Имя категории</th>
+            <th>Устройства категории</th>
         </tr>
         <tr th:each="category : ${categories}">
             <td th:text="${category.categoryName}"></td>
+            <td>
+                <p th:each="i : ${category.categoryItems}" th:text="${i.name}"></p>
+            </td>
         </tr>
         </table>
 </div>
