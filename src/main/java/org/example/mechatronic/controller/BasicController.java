@@ -12,7 +12,7 @@ public class BasicController {
     CategoryRepository repository;
     @GetMapping("/")
     public String index(){
-        return "index";
+        return "redirect:/categories";
     }
 
 }

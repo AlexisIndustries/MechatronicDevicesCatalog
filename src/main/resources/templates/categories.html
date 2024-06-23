@@ -3,21 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <title>Категории</title>
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet">
 </head>
 <body>
 <h1>Категории:</h1>
 <div th:if="${ not#lists.isEmpty(categories)}">
-    <table border="2">
+    <table class="table table-bordered">
+        <thead>
         <tr>
             <th style="width: 250px">Имя категории</th>
             <th style="width: 250px">Устройства категории</th>
         </tr>
+        </thead>
+        <tbody>
         <tr th:each="category : ${categories}">
             <td>
                 <span style="display: flex; justify-content: space-between">
                 <p th:text="${category.categoryName}"></p>
                 <p>
-                    <a th:href="@{/deleteCategory/__${category.categoryId}__}">Удалить категорию</a>
+                    <a class = "btn btn-danger" th:href="@{/deleteCategory/__${category.categoryId}__}">Удалить категорию</a>
                 </p>
                 </span>
             </td>
@@ -25,15 +29,16 @@
                 <span style="display: flex; justify-content: space-between" th:each="i : ${category.categoryItems}">
                     <p th:text="${i.name}"></p>
                     <p>
-                        <a th:href="@{/deleteDeviceInCategory/__${i.deviceId}__}">Удалить устройство</a>
-                        <a th:href="@{/viewDevice/__${i.deviceId}__}">Характеристики устройства</a>
+                        <a class = "btn btn-danger" th:href="@{/deleteDeviceInCategory/__${i.deviceId}__}">Удалить устройство</a>
+                        <a class = "btn btn-success" th:href="@{/viewDevice/__${i.deviceId}__}">Характеристики устройства</a>
                     </p>
                 </span>
             </td>
         </tr>
+        </tbody>
         </table>
-    <a th:href="@{/addCategory}">Добавить категорию</a>
-    <a th:href="@{/addItemsForCategory}">Добавить предмет категории</a>
+    <a class = "btn btn-secondary" th:href="@{/addCategory}">Добавить категорию</a>
+    <a class = "btn btn-secondary" th:href="@{/addItemsForCategory}">Добавить предмет категории</a>
 </div>
 </body>
 </html>

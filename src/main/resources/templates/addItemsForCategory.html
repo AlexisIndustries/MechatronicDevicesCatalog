@@ -3,17 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <title>Добавить подкатегорию</title>
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet">
 </head>
 <body>
-<form action="#" th:action="@{/addItemsForCategory}" th:object="${category}" method="post">
-    <p>Категория: <select th:field="${category.categoryName}">
+<h1>Добавить предмет в категорию:</h1>
+<form class = "container col-4 mb-3" action="#" th:action="@{/addItemsForCategory}" th:object="${category}" method="post">
+    <p >Категория: <select th:field="${category.categoryName}">
         <option th:each="i : ${categories}" th:value="${i.categoryName}" th:text="${i.categoryName}"></option>
     </select>
     </p>
-    <p>Название устройства: <input type="text" th:field="${category.itemName}" /></p>
-    <p>Описание устройства: <input type="text" th:field="${category.description}" /></p>
-    <p>Цена устройства: <input type="number" th:field="${category.price}" /></p>
-    <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+    <p>Название устройства: <input input class="form-control" type="text" th:field="${category.itemName}" /></p>
+    <p>Описание устройства: <input input class="form-control" type="text" th:field="${category.description}" /></p>
+    <p>Цена устройства: <input input class="form-control" type="number" th:field="${category.price}" /></p>
+    <p><input class = "btn btn-success" type="submit" value="Добавить" /> <input class="btn btn-danger" type="reset" value="Cбросить" /><a class = "btn btn-primary" th:href="@{/categories}">Вернуться назад</a></p>
 </form>
 </body>
 </html>

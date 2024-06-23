@@ -34,14 +34,18 @@ public class DevicesAndCategoriesController {
     }
 
     @PostMapping("/addCategory")
-    public String addCategoryPost(@ModelAttribute Category category) {
+    public String addCategoryPost(@ModelAttribute Category category, Model model) {
+        if (categoryRepository.existsCategoryByCategoryName(category.getCategoryName())) {
+            model.addAttribute("errors", "Категория уже существует");
+            model.addAttribute("category", category);
+                return "addCategory";
+        }
         categoryRepository.save(category);
         return "redirect:categories";
     }
 
     @GetMapping("/addItemsForCategory")
     public String addItemsForCategory(Model model) {
-        //ArrayList<Category> categories = (ArrayList<Category>) categoryRepository.findAll();
         model.addAttribute("category", new CategoryItemDto("", "", "", 0));
         model.addAttribute("categories", categoryRepository.findAll());
         return "addItemsForCategory";

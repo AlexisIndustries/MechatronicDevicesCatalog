@@ -3,11 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <title>Описание устройства</title>
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet">
 </head>
 <body>
-<h1 th:text="${device.name}"></h1>
-<b>Категория устройства:</b><p th:text="${categoryName}"></p>
-<b>Описание устройства:</b><p th:text="${device.description}"></p>
-<b>Цена устройства:</b><p th:text="${device.price}"></p>
+<div class="card mb-3" style="max-width: 540px;">
+    <div class="row g-0">
+        <div class="col-md-4">
+            <img src="..." class="img-fluid rounded-start" alt="...">
+        </div>
+        <div class="col-md-8">
+    <div class="card-body">
+        <h5 class="card-title" th:text="${device.name}"></h5>
+        <p class="card-text" th:text="${device.description}"></p>
+        <b>Цена устройства:</b><p class="card-text" th:text="${device.price}"></p>
+    </div>
+        </div>
+</div>
+<a class = "btn btn-primary" th:href="@{/categories}">Вернуться назад</a>
+<!--<h1 th:text="${device.name}"></h1>-->
+<!--<b>Категория устройства:</b><p th:text="${categoryName}"></p>-->
+<!--<b>Описание устройства:</b><p th:text="${device.description}"></p>-->
+<!--<b>Цена устройства:</b><p th:text="${device.price}"></p>-->
+<!--<a class = "btn btn-primary" th:href="@{/categories}">Вернуться назад</a>-->
 </body>
 </html>

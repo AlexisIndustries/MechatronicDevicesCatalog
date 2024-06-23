@@ -1,15 +1,19 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org%22%3E/">
+<html >
 <head>
     <title> Добавить категорию </title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet">
 </head>
 <body>
-<h1>Добавить  категорию:</h1>
-<form action="#" th:action="@{/addCategory}" th:object="${category}" method="post">
-    <p>Имя: <input type="text" th:field="*{categoryName}" /></p>
-    <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+<h1>Добавить категорию:</h1>
+
+<form class="container col-4 mb-3" action="#" th:action="@{/addCategory}" th:object="${category}" method="post">
+    <div class="alert alert-danger" th:each="error : ${errors}">
+        <p th:text="${error}"></p>
+    </div>
+    <p class="form-label">Имя: <input class="form-control" type="text" th:field="*{categoryName}" /></p>
+    <p class="form-label"><input class="btn btn-success" type="submit" value="Подтвердить" /> <input class="btn btn-warning" type="reset" value="Сбросить" /><a class = "btn btn-primary" th:href="@{/categories}">Вернуться назад</a></p>
 </form>
-<a th:href="@{/categories}">Вернуться назад</a>
 </body>
 </html>
