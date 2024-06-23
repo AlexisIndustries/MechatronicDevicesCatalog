@@ -1,5 +1,6 @@
 package org.example.mechatronic.controller;
 
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.example.mechatronic.dto.CategoryItemDto;
 import org.example.mechatronic.model.Category;
@@ -8,9 +9,7 @@ import org.example.mechatronic.repositories.CategoryRepository;
 import org.example.mechatronic.repositories.MechatronicDeviceRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,5 +54,12 @@ public class DevicesAndCategoriesController {
         category.setCategoryItems(devices);
         categoryRepository.save(category);
         return "redirect:categories";
+    }
+
+    @RequestMapping(value = "/deleteCategory/{categoryId}", method = RequestMethod.GET)
+    @Transactional
+    public String deleteCategory(@PathVariable(name = "categoryId") String categoryId) {
+        categoryRepository.deleteCategoryByCategoryId(Long.parseLong(categoryId));
+        return "redirect:/categories";
     }
 }

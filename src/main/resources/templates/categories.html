@@ -13,7 +13,10 @@
             <th>Устройства категории</th>
         </tr>
         <tr th:each="category : ${categories}">
-            <td th:text="${category.categoryName}"></td>
+            <td>
+                <p th:text="${category.categoryName}"></p>
+                <a th:href="@{/deleteCategory/__${category.categoryId}__}">Удалить категорию</a>
+            </td>
             <td>
                 <p th:each="i : ${category.categoryItems}" th:text="${i.name}"></p>
             </td>

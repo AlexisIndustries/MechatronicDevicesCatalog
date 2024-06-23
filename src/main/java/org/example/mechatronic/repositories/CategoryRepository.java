@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository;
 
 public interface  CategoryRepository extends JpaRepository<Category, Long> {
     Category findCategoryByCategoryName(String name);
+    void deleteCategoryByCategoryId(Long categoryId);
 }
