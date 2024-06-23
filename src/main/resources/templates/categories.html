@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Категории</title>
+</head>
+<body>
+<h1>Категории:</h1>
+<div th:if="${ not#lists.isEmpty(categories)}">
+    <table>
+        <tr>
+            <th>Имя категории</th>
+        </tr>
+        <tr th:each="category : ${categories}">
+            <td th:text="${category.categoryName}"></td>
+        </tr>
+        </table>
+</div>
+</body>
+</html>
