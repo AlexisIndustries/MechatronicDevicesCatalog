@@ -30,5 +30,4 @@ public class MechatronicDevice {
     public MechatronicDevice() {
 
     }
-
 }

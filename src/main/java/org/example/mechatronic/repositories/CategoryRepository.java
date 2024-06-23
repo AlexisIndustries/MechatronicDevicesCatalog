@@ -12,4 +12,6 @@ public interface  CategoryRepository extends JpaRepository<Category, Long> {
     void deleteCategoryByCategoryId(Long categoryId);
     Category findCategoryByCategoryItemsContains(MechatronicDevice device);
     boolean existsCategoryByCategoryName(String name);
+
+    Category findByCategoryName(String category);
 }
