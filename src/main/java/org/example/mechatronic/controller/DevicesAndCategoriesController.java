@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @AllArgsConstructor
 @Controller
@@ -61,5 +62,21 @@ public class DevicesAndCategoriesController {
     public String deleteCategory(@PathVariable(name = "categoryId") String categoryId) {
         categoryRepository.deleteCategoryByCategoryId(Long.parseLong(categoryId));
         return "redirect:/categories";
+    }
+
+    @RequestMapping(value = "/deleteDeviceInCategory/{deviceId}", method = RequestMethod.GET)
+    @Transactional
+    public String deleteDeviceInCategory(@PathVariable(name = "deviceId") String deviceId) {
+        deviceRepository.deleteMechatronicDeviceByDeviceId(Long.parseLong(deviceId));
+        return "redirect:/categories";
+    }
+
+    @RequestMapping(value = "/viewDevice/{deviceId}", method = RequestMethod.GET)
+    public String viewDevice(@PathVariable(name = "deviceId") String deviceId, Model model) {
+        MechatronicDevice device = deviceRepository.findByDeviceId(Long.parseLong(deviceId));
+        Category category = categoryRepository.findCategoryByCategoryItemsContains(device);
+        model.addAttribute("device", device);
+        model.addAttribute("categoryName", category.getCategoryName());
+        return "deviceDescription";
     }
 }

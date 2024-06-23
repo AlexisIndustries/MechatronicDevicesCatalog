@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <title>Категории</title>
@@ -9,19 +9,31 @@
 <div th:if="${ not#lists.isEmpty(categories)}">
     <table border="2">
         <tr>
-            <th>Имя категории</th>
-            <th>Устройства категории</th>
+            <th style="width: 250px">Имя категории</th>
+            <th style="width: 250px">Устройства категории</th>
         </tr>
         <tr th:each="category : ${categories}">
             <td>
+                <span style="display: flex; justify-content: space-between">
                 <p th:text="${category.categoryName}"></p>
-                <a th:href="@{/deleteCategory/__${category.categoryId}__}">Удалить категорию</a>
+                <p>
+                    <a th:href="@{/deleteCategory/__${category.categoryId}__}">Удалить категорию</a>
+                </p>
+                </span>
             </td>
             <td>
-                <p th:each="i : ${category.categoryItems}" th:text="${i.name}"></p>
+                <span style="display: flex; justify-content: space-between" th:each="i : ${category.categoryItems}">
+                    <p th:text="${i.name}"></p>
+                    <p>
+                        <a th:href="@{/deleteDeviceInCategory/__${i.deviceId}__}">Удалить устройство</a>
+                        <a th:href="@{/viewDevice/__${i.deviceId}__}">Характеристики устройства</a>
+                    </p>
+                </span>
             </td>
         </tr>
         </table>
+    <a th:href="@{/addCategory}">Добавить категорию</a>
+    <a th:href="@{/addItemsForCategory}">Добавить предмет категории</a>
 </div>
 </body>
 </html>

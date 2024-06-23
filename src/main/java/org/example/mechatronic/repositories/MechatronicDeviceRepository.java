@@ -5,4 +5,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface MechatronicDeviceRepository extends JpaRepository<MechatronicDevice, Long> {
+    void deleteMechatronicDeviceByDeviceId(Long deviceId);
+    MechatronicDevice findByDeviceId(Long deviceId);
 }
