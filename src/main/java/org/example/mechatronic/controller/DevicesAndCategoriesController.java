@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @AllArgsConstructor
@@ -60,7 +61,11 @@ public class DevicesAndCategoriesController {
         Category category = categoryRepository.findCategoryByCategoryName(categoryItemDto.getCategoryName());
         List<MechatronicDevice> devices = category.getCategoryItems();
         MultipartFile file = categoryItemDto.getImage();
-        ImageData imageData = ImageData.builder().name(file.getOriginalFilename()).type(file.getContentType()).imageData(ImageUtil.compressImage(file.getBytes())).build();
+        ImageData imageData;
+        if (Objects.equals(file.getOriginalFilename(), "")) {
+            imageData = null;
+        } else imageData = ImageData.builder().name(file.getOriginalFilename()).type(file.getContentType()).imageData(ImageUtil.compressImage(file.getBytes())).build();
+
         devices.add(new MechatronicDevice(categoryItemDto.getItemName(), categoryItemDto.getDescription(), categoryItemDto.getPrice(), imageData));
         category.setCategoryItems(devices);
         categoryRepository.save(category);
@@ -115,7 +120,10 @@ public class DevicesAndCategoriesController {
         //MechatronicDevice device = deviceRepository.findByDeviceId(updatedDevice.getDeviceId());
         //updatedDevice.setDeviceId(Long.valueOf(deviceId));
         MultipartFile file = categoryItemDto.getImage();
-        ImageData imageData = ImageData.builder().name(file.getOriginalFilename()).type(file.getContentType()).imageData(ImageUtil.compressImage(file.getBytes())).build();
+        ImageData imageData;
+        if (Objects.equals(file.getOriginalFilename(), "")) {
+            imageData = null;
+        } else imageData = ImageData.builder().name(file.getOriginalFilename()).type(file.getContentType()).imageData(ImageUtil.compressImage(file.getBytes())).build();
         MechatronicDevice device = new MechatronicDevice(categoryItemDto.getItemName(), categoryItemDto.getDescription(), categoryItemDto.getPrice(), imageData);
         device.setDeviceId(Long.valueOf(categoryItemDto.getItemId()));
         deviceRepository.save(device);
