@@ -1,20 +1,21 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Добавить подкатегорию</title>
     <link th:href="@{/css/bootstrap.css}" rel="stylesheet">
 </head>
 <body>
-<h1>Добавить предмет в категорию:</h1>
-<form class = "container col-4 mb-3" action="#" th:action="@{/addItemsForCategory}" th:object="${category}" method="post">
+<h1>Добавить устройство в категорию:</h1>
+<form class = "container col-4 mb-3" action="#" th:action="@{/addItemsForCategory}" th:object="${category}" method="post" enctype="multipart/form-data">
     <p >Категория: <select th:field="${category.categoryName}">
         <option th:each="i : ${categories}" th:value="${i.categoryName}" th:text="${i.categoryName}"></option>
     </select>
     </p>
-    <p>Название устройства: <input input class="form-control" type="text" th:field="${category.itemName}" /></p>
-    <p>Описание устройства: <input input class="form-control" type="text" th:field="${category.description}" /></p>
-    <p>Цена устройства: <input input class="form-control" type="number" th:field="${category.price}" /></p>
+    <p>Название устройства: <input class="form-control" type="text" th:field="${category.itemName}" /></p>
+    <p>Описание устройства: <input  class="form-control" type="text" th:field="${category.description}" /></p>
+    <p>Цена устройства: <input class="form-control" type="number" th:field="${category.price}" /></p>
+    <p><input type="file" name="image" accept="image/*" class="form-check-input" th:field="${category.image}"/></p>
     <p><input class = "btn btn-success" type="submit" value="Добавить" /> <input class="btn btn-danger" type="reset" value="Cбросить" /><a class = "btn btn-primary" th:href="@{/categories}">Вернуться назад</a></p>
 </form>
 </body>

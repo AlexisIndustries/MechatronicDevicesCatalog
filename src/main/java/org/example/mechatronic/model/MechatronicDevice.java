@@ -1,9 +1,6 @@
 package org.example.mechatronic.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 
 
@@ -19,10 +16,15 @@ public class MechatronicDevice {
     private String description; // Описание устройства
     private double price; // Цена устройства
 
-    public MechatronicDevice(  String name, String description, double price ){
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "image_data_id")
+    private ImageData imageData;
+
+    public MechatronicDevice(  String name, String description, double price, ImageData imageData ){
         this.price = price;
         this.description = description;
         this.name = name;
+        this.imageData = imageData;
     }
 
     public MechatronicDevice() {
